@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css') }}">
+    <link rel="icon" href=" {{ url_for('static', filename = 'image/favicon.ico') }}">
+    <title>Machine Learning</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h2>Grupo TRHISCUD</h2>
+        </div>
+    </header>
+    <!-- ARTICLE AND ASIDE -->
+    <div class="container">
+        <section class="main row">
+            <article class="col-xs-12 col-s-6 col-md-7">
+                <p>
+                <h3>¿Qué es Machine Learning?</h3>
+                <p>Machine Learning es una disciplina científica del ámbito de la Inteligencia Artificial que crea sistemas que aprenden automáticamente. Aprender en este contexto quiere decir identificar patrones complejos en millones de datos. La máquina que realmente aprende es un algoritmo que revisa los datos y es capaz de predecir comportamientos futuros.</p>                
+                </p>
+                <div class="col-md-6 color2 segment-tow">
+                    <form action="/index.html" , method="POST" , enctype="multipart/form-data">
+                        <button type="submit" class="btn btn-warning"> regresar al inicio</button>
+                    </form>
+                </div>
+            </article>
+        </section>
+        <!-- Formulario -->
+        <div class="row">             
+            <div class="col-md-6 color1">
+                <form action="/ML.html" , method="POST" , enctype="multipart/form-data" class="col-md-6">                              
+                    <br>
+                    <div class="form-group">
+                        <label for="semilla">Rango de la semilla desde 0 hasta: </label>
+                        <input class="form-control" type="number" name="semilla" id="semilla" value="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="semilla">Valor para el score: </label>   
+                        <input class="form-control" type="number" name="pres" value=0.5 id="pres">
+                    </div>
+                    <div class="form-group">
+                        <label for="semilla">Porcentaje para separar la muestra: </label>   
+                        <input class="form-control" type="number" name="tes" value=0.2 max="1" id="tes">
+                    </div>
+                    <div class="form-group">
+                        <label for="semilla">Valores de entrada para predecir: </label>   
+                        <input class="form-control" type="text" name="pred" value=0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5 id="pres">
+                    </div>
+                    <br>               
+            </div>
+            <div class="col-md-6 color1"><br>
+                <!-- CHECKBOX -->
+                <label for="ann">Red neuronal artificial (ann)</label>
+                <input type="checkbox" id="ann" name="ann" value="matchwithpairs" checked><br>
+                <label for="knn">Vecinos más cercanos (knn)</label>
+                <input type="checkbox" id="knn" name="knn" value="matchwithpairs"><br>
+                <label for="svc">Vectores de soporte (svc)</label>
+                <input type="checkbox" id="svc" name="svc" value="matchwithpairs"><br>
+                <label for="lg">Regresión logística (lg)</label>
+                <input type="checkbox" id="lg" name="lg" value="matchwithpairs"><br>                    
+                <!-- END CHECKBOX -->                    
+                <button type="submit" class="btn btn-warning center-block">Procesar</button>
+            </form>                
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-md-3 color2"><br>                
+                <h5>Matriz de confusión: </h5>
+                <p>En el campo de la inteligencia artificial una matriz de confusión es una herramienta que permite la visualización del desempeño de un algoritmo que se emplea en aprendizaje supervisado. Cada columna de la matriz representa el número de predicciones de cada clase, mientras que cada fila representa a las instancias en la clase real. Uno de los beneficios de las matrices de confusión es que facilitan ver si el sistema está confundiendo dos clases.</p>
+                <img src="{{ url_for('static', filename='image/mf.png') }} " alt="fondo" class="img-thumbnail">
+            </div>
+            <div class="col-md-3 color3"><br>
+                <h5>Score (precisión): </h5>
+                <p>Con la métrica de precisión podemos medir la calidad del modelo de machine learning en tareas de clasificación. En el ejemplo, se refiere a que la precisión es la respuesta a la pregunta ¿qué porcentaje de los clientes que contactemos estarán interesados.</p>
+                <img src="{{ url_for('static', filename='image/pres.png') }} " alt="fondo" class="img-thumbnail">
+            </div>
+            <div class="col-md-3 color2"><br>
+                <h5>Recall: </h5>
+                <p>La métrica de exhaustividad nos va a informar sobre la cantidad que el modelo de machine learning es capaz de identificar. En el ejemplo, se refiere a que la exhaustividad (recall) es la respuesta a la pregunta ¿qué porcentaje de los clientes están interesados somos capaces de identificar.</p>
+                <img src="{{ url_for('static', filename='image/re.png') }} " alt="fondo" class="img-thumbnail">
+            </div>
+            <div class="col-md-3 color3"><br>
+                <h5>F1: </h5>
+                <p>El valor F1 se utiliza para combinar las medidas de precision y recall en un sólo valor. Esto es práctico porque hace más fácil el poder comparar el rendimiento combinado de la precisión y la exhaustividad entre varias soluciones.</p>
+                <img src="{{ url_for('static', filename='image/f1.png') }} " alt="fondo" class="img-thumbnail">
+            </div>
+        </div>
+        <!--  TABLES  -->
+        <div class="row row-tables-ml">
+            <div class="col-md-3 color1"><br>
+                <h5>Matriz de confusión:</h5>
+                <table class="table border-wh">
+                    {% block conten %}
+                    {{ data|safe }}
+                    {% endblock %}
+                </table>
+            </div>
+            <div class="col-md-3 color1"><br>
+                <h5>Precisión:</h5>
+                <table class="table">
+                    {% for table in tables %}
+                    {{ table|safe }}              
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-md-3 color1"><br>
+                <h5>Recall:</h5>
+                <table class="table">
+                    {% for table1 in tables1 %}
+                    {{ table1|safe }}
+                    {% endfor %}
+                </table>                    
+            </div>
+            <div class="col-md-3 color1"><br>
+                <h5>F1:</h5>
+                <table class="table">
+                    {% for table2 in tables2 %}
+                    {{ table2|safe }}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 color2"><br>
+                <h5>Acuary & Score</h5>
+                <table class="table">
+                    {% for table3 in tables3 %}
+                    {{ table3|safe }}
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-md-6 color2"><br>
+                <h5>Resultados: </h5>
+                <table class="table">
+                    {% for val in val %}
+                    {{ val|safe }}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class="row  final-row center-block">
+            <div class="col-md-12 color1">
+               <h5>Resultados de la predicción:</h5> 
+                	{{ str1|string }}
+                    {% if valoracu|int,valorsco|int < 0.70 %}
+                     <p>No es muy confiable el método pruebe otra configuración.</p>
+                    {% else %}
+                    <p>Si es menor a 90 podría mejorar.</p>
+                    {% endif %}
+                    <p>
+                    De todos los datos del test: ({{ t|float }}) hay ({{ diago|float }}) aciertos: y
+                    ({{ t|float-diago|float }}) desaciertos:
+                	</p>
+            </div>
+        </div>        
+    </div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 segment-one">
+                        <h4>Desarrolladores: </h4>
+                        <p>Andres Mateo Nariño Rodríguez</p>
+                        <p>John Sebastian Martinez Zabala</p>
+                        <p>Juan Sebastian Mancera</p>
+						<p>Director Grupo TRHISCUD: Alberto Acosta Lopez</p>
+                    </div>
+                    <div class="col-md-6 segment two">
+                        <h4>Contacto: </h4>
+                        <p>narinomateo2119@gmail.com</p>
+						<p>ingtelec@yahoo.es</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--BOOTSTRAP Y JQUERY-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
